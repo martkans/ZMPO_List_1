@@ -44,39 +44,29 @@ bool isInRange(int number, int lower_limit, int upper_limit) {
     }
 }
 
-int provideInt(int lower_limit, int upper_limit) {
+int provideInt(int lower_limit, int upper_limit, bool * error) {
     string inputData;
     cin >> inputData;
     if (isInRange(convertStringToInt(inputData), lower_limit, upper_limit)){
+        *error = false;
         return convertStringToInt(inputData);
     } else {
-        do{
-            string alertMessage;
-            if (lower_limit != upper_limit){
-                alertMessage = "Podaj wartość całkowitą z zakresu (" + convertIntToString(lower_limit) + "-" + convertIntToString(upper_limit) + ")";
-            } else {
-                alertMessage = "Masz do wyboru tylko jedną wartość: " + convertIntToString(lower_limit);
-            }
-            alert(alertMessage);
-            cin >> inputData;
-        }while (!isInRange(convertStringToInt(inputData), lower_limit, upper_limit));
+        *error = true;
+        return 0;
     }
 
-    return  convertStringToInt(inputData);
 }
 
-int chooseBetween1And10() {
+int chooseBetween1And10(bool * error) {
     string inputData;
     cin >> inputData;
     if (inputData == "1" || inputData == "10"){
+        *error = false;
         return convertStringToInt(inputData);
     } else {
-        do{
-            alert("Nie masz żadnych obiektów! Stwórz je lub zakończ program!\n");
-            cin >> inputData;
-        }while (inputData != "1" && inputData != "10");
+        *error = true;
+        return 0;
     }
-    return convertStringToInt(inputData);
 }
 
 bool isTOrN(string input){
@@ -87,17 +77,14 @@ bool isTOrN(string input){
     }
 }
 
-string provideYesOrNo() {
+string provideYesOrNo(bool * error) {
     string confirm;
     cin >> confirm;
     if (isTOrN(confirm)){
+        *error = false;
         return confirm;
     } else {
-        do{
-            alert("Wprowadź 't' aby potwierdzić lub 'n', aby zaprzeczyć!\n");
-            cin >> confirm;
-        }while(!isTOrN(confirm));
+        *error = true;
+        return "0";
     }
-
-    return confirm;
 }

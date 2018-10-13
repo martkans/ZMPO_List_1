@@ -21,10 +21,10 @@ void eraseTable(int *table, int table_length);
 bool isInRange(int number, int lower_limit, int upper_limit);
 bool isTOrN(string input);
 
-int provideInt(int lower_limit, int upper_limit);
-int chooseBetween1And10();
+int provideInt(int lower_limit, int upper_limit, bool * error);
+int chooseBetween1And10(bool * error);
 
-string provideYesOrNo();
+string provideYesOrNo(bool * error);
 
 
 #endif //LISTA1_TOOLS_H
