@@ -22,7 +22,7 @@ bool isInRange(int number, int lower_limit, int upper_limit);
 bool isTOrN(string input);
 
 int provideInt(int lower_limit, int upper_limit, bool * error);
-int chooseBetween1And10(bool * error);
+int chooseBetweenTwoNumbers(int first, int second, bool * error);
 
 string provideYesOrNo(bool * error);
 

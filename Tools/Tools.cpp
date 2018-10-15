@@ -3,7 +3,7 @@
 //
 
 #include "Tools.h"
-#include "../UserInterface/UserInterface.h"
+#include "../UserInterface/CUserInterface.h"
 
 string convertIntToString(int number){
     stringstream ss;
@@ -57,10 +57,10 @@ int provideInt(int lower_limit, int upper_limit, bool * error) {
 
 }
 
-int chooseBetween1And10(bool * error) {
+int chooseBetweenTwoNumbers(int first, int second, bool * error) {
     string inputData;
     cin >> inputData;
-    if (inputData == "1" || inputData == "10"){
+    if (convertStringToInt(inputData) == first || convertStringToInt(inputData) == second){
         *error = false;
         return convertStringToInt(inputData);
     } else {

@@ -1,6 +1,7 @@
-#include "UserInterface/UserInterface.h"
+#include "UserInterface/CUserInterface.h"
 
 int main() {
-    start();
+    CUserInterface *user_interface = new CUserInterface();
+    user_interface->start();
     return 0;
 }
