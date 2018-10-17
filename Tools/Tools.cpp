@@ -3,7 +3,7 @@
 //
 
 #include "Tools.h"
-#include "../UserInterface/CUserInterface.h"
+#include "../CUserInterface/CUserInterface.h"
 
 string convertIntToString(int number){
     stringstream ss;
@@ -84,25 +84,15 @@ int chooseBetweenTwoNumbers(int first, int second, bool *error) {
     return number;
 }
 
-bool isTOrN(string input){
-    if (input == "T" || input == "t" || input == "N" || input == "n"){
-        return true;
-    } else {
-        return false;
-    }
-}
-
 bool provideYesOrNo(bool *error) {
     string confirm;
 
     getline(cin, confirm);
 
-    if (isTOrN(confirm)){
-        *error = false;
-        if (confirm == "T" || confirm == "t"){
-            return true;
-        }
-    } else {
+    *error = false;
+    if (confirm == "T" || confirm == "t"){
+        return true;
+    } else if (confirm != "N" && confirm != "n"){
         *error = true;
     }
     return false;

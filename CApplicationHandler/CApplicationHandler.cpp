@@ -17,18 +17,15 @@ int CApplicationHandler::getTableLastIndex(int position_of_object) {
 }
 
 void CApplicationHandler::createDefaultObject() {
-    CTable *temp_pointer = new CTable();
-    CTable_objects.push_back(temp_pointer);
+    CTable_objects.push_back(new CTable());
 }
 
 void CApplicationHandler::createPersonalizedObject(int size_of_table, string name) {
-    CTable *temp_pointer = new CTable(size_of_table, name);
-    CTable_objects.push_back(temp_pointer);
+    CTable_objects.push_back(new CTable(size_of_table, name));
 }
 
 void CApplicationHandler::cloneObject(int position_of_existing_object) {
-    CTable *temp_pointer = new CTable(*CTable_objects.at(static_cast<unsigned long>(position_of_existing_object)));
-    CTable_objects.push_back(temp_pointer);
+    CTable_objects.push_back(CTable_objects.at(static_cast<unsigned long>(position_of_existing_object))->cloneObject());
 }
 
 void CApplicationHandler::changeNameOfObject(int position_of_object, string new_name) {

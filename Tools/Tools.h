@@ -19,7 +19,7 @@ int *copyTable(int *source_table, int source_table_size, int target_table_size);
 void eraseTable(int *table,int first_index, int last_index);
 
 bool isInRange(int number, int lower_limit, int upper_limit);
-bool isTOrN(string input);
+
 
 int provideInt(int lower_limit, int upper_limit, bool *error);
 int chooseBetweenTwoNumbers(int first, int second, bool *error);
