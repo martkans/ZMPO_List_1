@@ -2,8 +2,7 @@
 // Created by martkans on 07.10.18.
 //
 
-#include <iostream>
-#include <sstream>
+
 
 #include "CTable.h"
 
@@ -20,7 +19,7 @@ CTable::CTable(int size_of_table, string new_name) : DEFAULT_SIZE_OF_TABLE(10), 
 }
 
 CTable::CTable(CTable &object_to_copy) : DEFAULT_SIZE_OF_TABLE(10), DEFAULT_NAME_OF_OBJECT("CTable Object"){
-    setName(object_to_copy.name+"_copy");
+    setName(object_to_copy.name + "_copy");
     copyTableFromOtherObject(object_to_copy);
     cout << "\nkopiuj: '"<< name << "'\n";
 }
@@ -35,7 +34,7 @@ void CTable::constructorHelper(int size, string name) {
     setName(name);
     table_size = size;
     table = new int[table_size];
-    eraseTable(table, table_size);
+    eraseTable(table, 0, table_size);
 }
 
 
@@ -52,13 +51,14 @@ int CTable::getTableSize() {
 }
 
 void CTable::changeSizeOfTable(int new_size) {
-    int * temp_table = table;
+    int *temp_table = table;
     table = copyTable(temp_table, table_size, new_size);
+    eraseTable(table, table_size, new_size);
     table_size = new_size;
     delete[](temp_table);
 }
 
-CTable * CTable::cloneObject() {
+CTable *CTable::cloneObject() {
     return new CTable(*this);
 }
 

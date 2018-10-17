@@ -8,27 +8,27 @@ CApplicationHandler::~CApplicationHandler() {
     deleteAllObjects();
 }
 
-int CApplicationHandler::getVectorSize() {
-    return static_cast<int>(CTable_objects.size());
+int CApplicationHandler::getVectorLastIndex() {
+    return static_cast<int>(CTable_objects.size() - 1);
 }
 
-int CApplicationHandler::getTableSize(int position_of_object) {
-    return CTable_objects.at(static_cast<unsigned long>(position_of_object))->getTableSize();
+int CApplicationHandler::getTableLastIndex(int position_of_object) {
+    return CTable_objects.at(static_cast<unsigned long>(position_of_object))->getTableSize() - 1;
 }
 
 void CApplicationHandler::createDefaultObject() {
-    CTable * tempPointer = new CTable();
-    CTable_objects.push_back(tempPointer);
+    CTable *temp_pointer = new CTable();
+    CTable_objects.push_back(temp_pointer);
 }
 
 void CApplicationHandler::createPersonalizedObject(int size_of_table, string name) {
-    CTable * tempPointer = new CTable(size_of_table, name);
-    CTable_objects.push_back(tempPointer);
+    CTable *temp_pointer = new CTable(size_of_table, name);
+    CTable_objects.push_back(temp_pointer);
 }
 
 void CApplicationHandler::cloneObject(int position_of_existing_object) {
-    CTable * tempPointer = new CTable(*CTable_objects.at(static_cast<unsigned long>(position_of_existing_object)));
-    CTable_objects.push_back(tempPointer);
+    CTable *temp_pointer = new CTable(*CTable_objects.at(static_cast<unsigned long>(position_of_existing_object)));
+    CTable_objects.push_back(temp_pointer);
 }
 
 void CApplicationHandler::changeNameOfObject(int position_of_object, string new_name) {

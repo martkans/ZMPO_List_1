@@ -18,8 +18,8 @@ class CApplicationHandler {
     public:
         ~CApplicationHandler();
 
-        int getVectorSize();
-        int getTableSize(int position_of_object);
+        int getVectorLastIndex();
+        int getTableLastIndex(int position_of_object);
 
         void createDefaultObject();
         void createPersonalizedObject(int size_of_table, string name);

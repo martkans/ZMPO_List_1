@@ -15,12 +15,11 @@ using namespace std;
 class CTable {
     private:
         string name;
-        int * table;
+        int *table;
         int table_size;
 
         const int DEFAULT_SIZE_OF_TABLE;
         const string DEFAULT_NAME_OF_OBJECT;
-
 
         void constructorHelper(int size, string name);
 
@@ -38,7 +37,7 @@ class CTable {
         void changeSizeOfTable(int new_size);
         int getValueOfTableCell(int cell_number);
         void setValueOfTableCell(int cell_number, int value);
-        CTable * cloneObject();
+        CTable *cloneObject();
         void copyTableFromOtherObject(CTable &object_to_copy);
         string toString();
 };

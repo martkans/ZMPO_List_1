@@ -17,11 +17,11 @@ using namespace std;
 class CUserInterface{
     public:
         CUserInterface();
-        ~CUserInterface();
+
         void start();
 
     private:
-        CApplicationHandler *applicationHandler;
+        CApplicationHandler *application_handler;
         bool *error;
 
         const string BAD_VALUE_ALERT_MESSAGE;
@@ -41,6 +41,7 @@ class CUserInterface{
             EXIT_MENU_VALUE = 10
         };
 
+        ~CUserInterface();
 
         void createObjectUserService();
         void changeTableSizeUserService();

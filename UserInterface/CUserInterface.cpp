@@ -3,12 +3,12 @@
 CUserInterface::CUserInterface() : BAD_VALUE_ALERT_MESSAGE("Podano błędną wartość.\n"),
                                    NO_OBJECTS_ALERT_MESSAGE("Nie masz żadnych obiektów! Stwórz je lub zakończ program!\n"),
                                    CONFIRMATION_ERROR_ALERT_MESSAGE("Wprowadź 't' aby potwierdzić lub 'n', aby zaprzeczyć!\n"){
-    applicationHandler = new CApplicationHandler();
+    application_handler = new CApplicationHandler();
     error = new bool();
 }
 
 CUserInterface::~CUserInterface() {
-    delete applicationHandler;
+    delete application_handler;
     delete error;
 }
 
@@ -22,7 +22,7 @@ void CUserInterface::start() {
 
         showMenu();
 
-        if(applicationHandler->getVectorSize() == 0){
+        if(application_handler->getVectorLastIndex() == -1){
             choice = chooseBetweenTwoNumbers(CREATE_OBJECTS_MENU_VALUE, EXIT_MENU_VALUE, error);
             if(*error){
                 alert(NO_OBJECTS_ALERT_MESSAGE);
@@ -87,7 +87,7 @@ void CUserInterface::start() {
 
 void CUserInterface::createObjectUserService(){
     int number_of_objects;
-    string answer;
+    bool answer;
 
     cout << "\nIle chcesz utworzyć obiektów?\n";
     number_of_objects = provideInt(1, INT_MAX, error);
@@ -104,14 +104,14 @@ void CUserInterface::createObjectUserService(){
                 alert(CONFIRMATION_ERROR_ALERT_MESSAGE);
                 --i;
             } else {
-                if (answer == "t" || answer == "T"){
-                    applicationHandler->createDefaultObject();
+                if (answer){
+                    application_handler->createDefaultObject();
                 } else {
                     string name;
                     int table_length;
 
                     cout << "\nPodaj nazwę obiektu: ";
-                    cin >> name;
+                    getline(cin, name);
 
                     cout << "\nPodaj długość tablicy obiektu: ";
                     table_length = provideInt(1, INT_MAX, error);
@@ -120,7 +120,7 @@ void CUserInterface::createObjectUserService(){
                         alert(BAD_VALUE_ALERT_MESSAGE);
                         --i;
                     } else {
-                        applicationHandler->createPersonalizedObject(table_length, name);
+                        application_handler->createPersonalizedObject(table_length, name);
                     }
                 }
             }
@@ -133,9 +133,9 @@ void CUserInterface::changeTableSizeUserService(){
     int position_of_object;
     int table_length;
 
-    cout << "\nPodaj nr obiektu, którego chcesz zmienić rozmiar (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, którego chcesz zmienić rozmiar (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
 
     if (*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
@@ -148,7 +148,7 @@ void CUserInterface::changeTableSizeUserService(){
         if (*error){
             alert(BAD_VALUE_ALERT_MESSAGE);
         } else {
-            applicationHandler->changeSizeOfObject(position_of_object, table_length);
+            application_handler->changeSizeOfObject(position_of_object, table_length);
         }
     }
 }
@@ -156,19 +156,18 @@ void CUserInterface::changeTableSizeUserService(){
 void CUserInterface::deleteSpecificObjectUserService() {
     int position_of_object;
 
-    cout << "\nPodaj nr obiektu, który chcesz usunąć (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, który chcesz usunąć (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
-
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
     if (*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
-    } else {
-        applicationHandler->deleteSpecificObject(position_of_object);
+    } else if(!*error){
+        application_handler->deleteSpecificObject(position_of_object);
     }
 }
 
 void CUserInterface::deleteAllObjectsUserService() {
-    string answer;
+    bool answer;
 
     cout << "\nCzy na pewno chcesz usunąć wszystkie obiekty? (t/n)\n";
     answer = provideYesOrNo(error);
@@ -176,8 +175,8 @@ void CUserInterface::deleteAllObjectsUserService() {
     if(*error){
         alert(CONFIRMATION_ERROR_ALERT_MESSAGE);
     } else{
-        if (answer == "t" || answer == "T") {
-            applicationHandler->deleteAllObjects();
+        if (answer) {
+            application_handler->deleteAllObjects();
         }
     }
 }
@@ -186,61 +185,61 @@ void CUserInterface::changeObjectNameUserService() {
     int position_of_object;
     string name;
 
-    cout << "\nPodaj nr obiektu, którego chcesz zmienić nazwę (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, którego chcesz zmienić nazwę (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
 
     if (*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
     } else {
         cout << "\nPodaj nową nazwę obiektu: ";
-        cin >> name;
+        getline(cin, name);
 
-        applicationHandler->changeNameOfObject(position_of_object, name);
+        application_handler->changeNameOfObject(position_of_object, name);
     }
 }
 
 void CUserInterface::cloneObjectUserService() {
     int position_of_object;
 
-    cout << "\nPodaj nr obiektu, który chcesz sklonować (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, który chcesz sklonować (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
 
     if(*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
     } else {
-        applicationHandler->cloneObject(position_of_object);
+        application_handler->cloneObject(position_of_object);
     }
 }
 
 void CUserInterface::showObjectInfoUserService() {
     int position_of_object;
 
-    cout << "\nPodaj nr obiektu, o którym informacje chcesz otrzymać (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, o którym informacje chcesz otrzymać (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
 
     if(*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
     } else {
-        cout << "\n" << applicationHandler->getInfoAboutObject(position_of_object) << "\n";
+        cout << "\n" << application_handler->getInfoAboutObject(position_of_object) << "\n";
     }
 }
 
 void CUserInterface::setTableCellValueUserService() {
     int position_of_object, cell_number, cell_value;
 
-    cout << "\nPodaj nr obiektu, którego wartość komórki chcesz zmienić (0 - " << applicationHandler->getVectorSize() - 1
+    cout << "\nPodaj nr obiektu, którego wartość komórki chcesz zmienić (0 - " << application_handler->getVectorLastIndex()
          << ")\n";
-    position_of_object = provideInt(0, applicationHandler->getVectorSize() - 1, error);
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
 
     if(*error){
         alert(BAD_VALUE_ALERT_MESSAGE);
     } else {
-        cout << "\nPodaj nr komórki, której chcesz zmienić (0 - " << applicationHandler->getTableSize(position_of_object) - 1
+        cout << "\nPodaj nr komórki, której chcesz zmienić (0 - " << application_handler->getTableLastIndex(position_of_object)
              << ")\n";
-        cell_number = provideInt(0, applicationHandler->getTableSize(position_of_object) - 1, error);
+        cell_number = provideInt(0, application_handler->getTableLastIndex(position_of_object), error);
 
         if(*error){
             alert(BAD_VALUE_ALERT_MESSAGE);
@@ -251,14 +250,14 @@ void CUserInterface::setTableCellValueUserService() {
             if(*error){
                 alert(BAD_VALUE_ALERT_MESSAGE);
             } else {
-                applicationHandler->setValueOfObjectCell(position_of_object, cell_number, cell_value);
+                application_handler->setValueOfObjectCell(position_of_object, cell_number, cell_value);
             }
         }
     }
 }
 
 void CUserInterface::showAllCTableObjectsUserService(){
-    cout << "\n" << applicationHandler->getShortInfoAboutAllObjects() << "\n";
+    cout << "\n" << application_handler->getShortInfoAboutAllObjects() << "\n";
 }
 
 void CUserInterface::exitUserService() {
