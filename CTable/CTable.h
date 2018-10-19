@@ -5,6 +5,9 @@
 #ifndef LISTA1_TABLECLASS_H
 #define LISTA1_TABLECLASS_H
 
+#define DEFAULT_SIZE_OF_TABLE    10
+#define DEFAULT_NAME_OF_OBJECT   "CTable Object"
+
 #include <string>
 #include <iostream>
 
@@ -17,9 +20,6 @@ class CTable {
         string name;
         int *table;
         int table_size;
-
-        const int DEFAULT_SIZE_OF_TABLE;
-        const string DEFAULT_NAME_OF_OBJECT;
 
         void constructorHelper(int size, string name);
 

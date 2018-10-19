@@ -1,8 +1,6 @@
 #include "CUserInterface.h"
 
-CUserInterface::CUserInterface() : BAD_VALUE_ALERT_MESSAGE("Podano błędną wartość.\n"),
-                                   NO_OBJECTS_ALERT_MESSAGE("Nie masz żadnych obiektów! Stwórz je lub zakończ program!\n"),
-                                   CONFIRMATION_ERROR_ALERT_MESSAGE("Wprowadź 't' aby potwierdzić lub 'n', aby zaprzeczyć!\n"){
+CUserInterface::CUserInterface() {
     application_handler = new CApplicationHandler();
     error = new bool();
 }
@@ -70,6 +68,10 @@ void CUserInterface::start() {
 
                 case SHOW_ALL_OBJECTS_MENU_VALUE:
                     showAllCTableObjectsUserService();
+                    break;
+
+                case TEST_MENU_VALUE:
+                    testUserService();
                     break;
 
                 case EXIT_MENU_VALUE:
@@ -260,8 +262,21 @@ void CUserInterface::showAllCTableObjectsUserService(){
     cout << "\n" << application_handler->getShortInfoAboutAllObjects() << "\n";
 }
 
+void CUserInterface::testUserService() {
+    int position_of_object;
+    cout << "\nPodaj nr obiektu, którego rozmiar chcesz zmienić (0 - " << application_handler->getVectorLastIndex()
+         << ")\n";
+
+    position_of_object = provideInt(0, application_handler->getVectorLastIndex(), error);
+
+    if(*error){
+        alert(BAD_VALUE_ALERT_MESSAGE);
+    } else {
+        application_handler->testObject(*application_handler->getObject(position_of_object));
+    }
+}
+
 void CUserInterface::exitUserService() {
-    delete this;
     cout << "\nŻegnaj!";
 }
 
@@ -278,7 +293,8 @@ void CUserInterface::showMenu() {
          << "7. Wypisz informacje o danym obiekcie\n"
          << "8. Ustaw wartość komórki wybranego obiektu CTable\n"
          << "9. Wyświetl listę dostępnych obiektów CTable\n"
-         << "10. Koniec programu\n";
+         << "10. Test\n"
+         << "11. Koniec programu\n";
 }
 
 void CUserInterface::alert(string message) {

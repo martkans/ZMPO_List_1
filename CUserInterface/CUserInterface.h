@@ -5,6 +5,22 @@
 #ifndef LISTA1_USERINTERFACE_H
 #define LISTA1_USERINTERFACE_H
 
+#define BAD_VALUE_ALERT_MESSAGE                 "Podano błędną wartość.\n"
+#define NO_OBJECTS_ALERT_MESSAGE                "Nie masz żadnych obiektów! Stwórz je lub zakończ program!\n"
+#define CONFIRMATION_ERROR_ALERT_MESSAGE        "Wprowadź 't' aby potwierdzić lub 'n', aby zaprzeczyć!\n"
+
+#define CREATE_OBJECTS_MENU_VALUE       1
+#define CHANGE_TABLE_SIZE_MENU_VALUE    2
+#define DELETE_OBJECT_MENU_VALUE        3
+#define DELETE_OBJECTS_MENU_VALUE       4
+#define CHANGE_OBJECT_NAME_MENU_VALUE   5
+#define CLONE_OBJECT_MENU_VALUE         6
+#define SHOW_OBJECT_INFO_MENU_VALUE     7
+#define SET_TABLE_CELL_MENU_VALUE       8
+#define SHOW_ALL_OBJECTS_MENU_VALUE     9
+#define TEST_MENU_VALUE                 10
+#define EXIT_MENU_VALUE                 11
+
 #include <iostream>
 #include <string>
 #include <climits>
@@ -17,6 +33,7 @@ using namespace std;
 class CUserInterface{
     public:
         CUserInterface();
+        ~CUserInterface();
 
         void start();
 
@@ -24,24 +41,6 @@ class CUserInterface{
         CApplicationHandler *application_handler;
         bool *error;
 
-        const string BAD_VALUE_ALERT_MESSAGE;
-        const string NO_OBJECTS_ALERT_MESSAGE;
-        const string CONFIRMATION_ERROR_ALERT_MESSAGE;
-
-        enum SWITCH_CONSTANTS{
-            CREATE_OBJECTS_MENU_VALUE = 1,
-            CHANGE_TABLE_SIZE_MENU_VALUE = 2,
-            DELETE_OBJECT_MENU_VALUE = 3,
-            DELETE_OBJECTS_MENU_VALUE = 4,
-            CHANGE_OBJECT_NAME_MENU_VALUE = 5,
-            CLONE_OBJECT_MENU_VALUE = 6,
-            SHOW_OBJECT_INFO_MENU_VALUE = 7,
-            SET_TABLE_CELL_MENU_VALUE = 8,
-            SHOW_ALL_OBJECTS_MENU_VALUE = 9,
-            EXIT_MENU_VALUE = 10
-        };
-
-        ~CUserInterface();
 
         void createObjectUserService();
         void changeTableSizeUserService();
@@ -52,6 +51,7 @@ class CUserInterface{
         void showObjectInfoUserService();
         void setTableCellValueUserService();
         void showAllCTableObjectsUserService();
+        void testUserService();
         void exitUserService();
 
         void showMenu();

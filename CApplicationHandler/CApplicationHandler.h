@@ -35,6 +35,10 @@ class CApplicationHandler {
 
         void deleteSpecificObject(int position_of_object);
         void deleteAllObjects();
+
+        void testObject(CTable other_object);
+
+        CTable* getObject(int position);
 };
 
 

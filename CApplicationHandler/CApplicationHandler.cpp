@@ -62,3 +62,12 @@ void CApplicationHandler::deleteAllObjects() {
         deleteSpecificObject(0);
     }
 }
+
+void CApplicationHandler::testObject(CTable other_object) {
+    other_object.changeSizeOfTable(1);
+}
+
+
+CTable *CApplicationHandler::getObject(int position) {
+    return CTable_objects.at(static_cast<unsigned long>(position));
+}

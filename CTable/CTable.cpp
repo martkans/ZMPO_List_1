@@ -8,18 +8,18 @@
 
 
 
-CTable::CTable() : DEFAULT_SIZE_OF_TABLE(10), DEFAULT_NAME_OF_OBJECT("CTable Object") {
+CTable::CTable() {
     constructorHelper(DEFAULT_SIZE_OF_TABLE, DEFAULT_NAME_OF_OBJECT);
     cout << "\nbezp: '"<< name << "'\n";
 }
 
-CTable::CTable(int size_of_table, string new_name) : DEFAULT_SIZE_OF_TABLE(10), DEFAULT_NAME_OF_OBJECT("CTable Object") {
+CTable::CTable(int size_of_table, string new_name) {
     constructorHelper(size_of_table, new_name);
     cout << "\nparametr: '"<< name << "'\n";
 }
 
-CTable::CTable(CTable &object_to_copy) : DEFAULT_SIZE_OF_TABLE(10), DEFAULT_NAME_OF_OBJECT("CTable Object"){
-    setName(object_to_copy.name + "_copy");
+CTable::CTable(CTable &object_to_copy) {
+    constructorHelper(DEFAULT_SIZE_OF_TABLE, object_to_copy.name + "_copy");
     copyTableFromOtherObject(object_to_copy);
     cout << "\nkopiuj: '"<< name << "'\n";
 }
