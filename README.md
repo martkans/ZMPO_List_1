@@ -31,7 +31,7 @@ Klasa *CTable* musi posiadać następujące konstruktory chrakteryzujące się n
     + Wypisuje na ekran tekst: *parametr: <s_name>*
     + Przypisuje długość tablicy równą *iTableLen*
 
-+ kopiujący: *CTable (CTable &pcOther)*
++ **kopiujący**: *CTable (CTable &pcOther)*
     + przypisujący polu *s_name*, wartość *pcOther.s_name* i doklejający tekst *_copy*. Na przykład, jeśli *pcOther.s_name* = *test* to wartość pola *s_name* dla obiektu utworzonego konstruktorem kopiującym będzie: *test_copy*
     + Kopiuje tablicę *int*
     + Wypisuje na ekran tekst: *kopiuj: <s_name>*
